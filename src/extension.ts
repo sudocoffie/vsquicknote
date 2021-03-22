@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext) {
 					fileContent = Buffer.from(readData).toString('utf8');
 				} catch {}
 	
-				fileContent = `✔ ${stringValue} ${new Date().toString()}` + "\n" + fileContent;
+				fileContent = `✔ ${stringValue} || ${new Date().toString()}` + "\n" + fileContent;
 				await vscode.workspace.fs.createDirectory(folderPath);
 				await vscode.workspace.fs.writeFile(filePath, Buffer.from(fileContent, 'utf8'));
 				vscode.window.showInformationMessage(`${stringValue} in ${folder.name}`);
