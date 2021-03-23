@@ -6,27 +6,29 @@ import * as vscode from 'vscode';
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	
-	let folderPath =vscode.Uri.parse("/vsquicknote");
+	let folderPath = vscode.Uri.parse("/vsquicknote");
 	let openFolders = vscode.workspace.workspaceFolders;
 	if (openFolders !== undefined && openFolders.length > 0) {
 		let folder = openFolders[0];
-		let filePath = vscode.Uri.joinPath(folderPath, `${folder.name}.txt`);
+		let filePath = vscode.Uri.joinPath(folderPath, `${folder.name}.fo`);
 		let disposable = vscode.commands.registerCommand('vsquicknote.takeNote', async ()  => {
 			let value = await vscode.window.showInputBox();
 			
-			let stringValue : string = value ? value : "";
+			if (!value) {
+				return;
+			}
 			
 			// Find out what project we are using
-				let fileContent : string = "";
-				try {
-					let readData = await vscode.workspace.fs.readFile(filePath);
-					fileContent = Buffer.from(readData).toString('utf8');
-				} catch {}
-	
-				fileContent = `✔ ${stringValue} || ${new Date().toString()}` + "\n" + fileContent;
-				await vscode.workspace.fs.createDirectory(folderPath);
-				await vscode.workspace.fs.writeFile(filePath, Buffer.from(fileContent, 'utf8'));
-				vscode.window.showInformationMessage(`${stringValue} in ${folder.name}`);
+			let fileContent : string = "";
+			try {
+				let readData = await vscode.workspace.fs.readFile(filePath);
+				fileContent = Buffer.from(readData).toString('utf8');
+			} catch {}
+
+			fileContent = `✔ ${value} || ${new Date().toString()}` + "\n\n" + fileContent;
+			await vscode.workspace.fs.createDirectory(folderPath);
+			await vscode.workspace.fs.writeFile(filePath, Buffer.from(fileContent, 'utf8'));
+			vscode.window.showInformationMessage(`${value} in ${folder.name}`);
 		});
 	
 		context.subscriptions.push(disposable);
