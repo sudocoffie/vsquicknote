@@ -7,7 +7,7 @@
     "url": "https://github.com/sudocoffie/vsquicknote.git"
   },
   "description": "Take quick notes in vscode, this is mainly for myown prefrences.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "engines": {
     "vscode": "^1.54.0"
   },
@@ -33,6 +33,26 @@
       {
         "command": "vsquicknote.openNotes",
         "title": "VSQuickNote: Open Notes"
+      }
+    ],
+    "languages": [
+      {
+        "id": "fo",
+        "aliases": [
+          "fo",
+          "fo"
+        ],
+        "extensions": [
+          ".fo"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "fo",
+        "scopeName": "source.fo",
+        "path": "./syntaxes/fo.tmLanguage.json"
       }
     ]
   },
