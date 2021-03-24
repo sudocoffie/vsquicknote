@@ -17,6 +17,25 @@ export function activate(context: vscode.ExtensionContext) {
 			if (!value) {
 				return;
 			}
+
+			if (value.length > 80) {
+				let newVal : string = "";
+				let setNewLine = false;
+				for (var i = 0; i < value.length; i++) {
+					if (!setNewLine && (i % 80) === 0 && i !== 0) {
+						setNewLine = true;
+					}
+
+					if (setNewLine === true && value[i] === " ") {
+						newVal += "\n";
+						setNewLine = false;
+						continue;
+					}
+					newVal += value[i];
+				}
+
+				value = newVal;
+			}
 			
 			// Find out what project we are using
 			let fileContent : string = "";

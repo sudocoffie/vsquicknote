@@ -7,7 +7,7 @@
     "url": "https://github.com/sudocoffie/vsquicknote.git"
   },
   "description": "Take quick notes in vscode, this is mainly for myown prefrences.",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "engines": {
     "vscode": "^1.54.0"
   },
